@@ -7,10 +7,14 @@ import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Group {
-	@Id public Long number;
-	@Index public Date date;
+	@Index @Id public Long number;
+	public Date date;
 	public String room;
 	public String instructor_name;
+	
+	public Group() {
+		date = new Date();
+	}
 	
 	public Group(Long number, Date date, String room, String instructor_name) {
 		super();
@@ -59,6 +63,4 @@ public class Group {
 	public void setInstructor_name(String instructor_name) {
 		this.instructor_name = instructor_name;
 	}
-	
-	
 }

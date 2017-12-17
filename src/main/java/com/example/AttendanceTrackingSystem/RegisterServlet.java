@@ -19,9 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.googlecode.objectify.ObjectifyService;
 
 public class RegisterServlet extends HttpServlet {
-
+    
 	@Override
 	  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		resp.sendRedirect("/guestbook.jsp?guestbookName");
+		
+	    UserService userService = UserServiceFactory.getUserService();
+	    User user = userService.getCurrentUser();  // Find out who the user is.
+
+	    String group_number = req.getParameter("group");
+	    Registration registration = new Registration(Long.parseLong(group_number), user.getEmail(), user.getUserId(), new Date());
+	    ObjectifyService.ofy().save().entity(registration).now();
+		resp.sendRedirect("/guestbook.jsp");
 	}
 }

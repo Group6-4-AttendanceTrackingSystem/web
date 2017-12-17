@@ -1,25 +1,34 @@
 package com.example.AttendanceTrackingSystem;
 
+import java.util.Date;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.annotation.Parent;
 
 @Entity
-public class Regestration {
+public class Registration {
 	@Load @Parent Key<Group> group;
 	
 	@Id public Long id;
 	public String user_email;
-	public String user_id;
+	@Index public String user_id;
+	public Date date;
 	
-	public Regestration (Long group_number, String email, String id) {
+	public Registration() {
+		date = new Date();
+	}
+	
+	public Registration (Long group_number, String email, String id, Date date) {
 		if(group_number != null) {
 			this.group = Key.create(Group.class, group_number);
 		}
 	    this.user_email = email;
 	    this.user_id = id;
+	    this.date = date; 
 	  }
 
 	public Key<Group> getGroup() {
@@ -53,7 +62,12 @@ public class Regestration {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	
-	
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}	
 }
