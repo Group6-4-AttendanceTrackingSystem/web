@@ -22,6 +22,8 @@ import com.googlecode.objectify.ObjectifyService;
 
 import javax.servlet.ServletContextListener;
 
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Date;
 
 import javax.servlet.ServletContextEvent;
@@ -34,10 +36,27 @@ public class OfyHelper implements ServletContextListener {
   public void contextInitialized(ServletContextEvent event) {
     // This will be invoked as part of a warmup request, or the first user request if no warmup
     // request.
-    ObjectifyService.register(Guestbook.class);
-    ObjectifyService.register(Greeting.class);
     ObjectifyService.register(Group.class);
-    ObjectifyService.register(Regestration.class);
+    ObjectifyService.register(Registration.class);
+    
+    ObjectifyService.begin();
+    
+    // create test data
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+    try {
+		Group g1 = new Group(1L, sdf.parse("06.11.2017 09:00"), "01.11.018", "Ana");
+		Group g2 = new Group(2L, sdf.parse("06.11.2017 13:45"), "01.11.018", "Sebastian");
+		Group g3 = new Group(3L, sdf.parse("06.11.2017 15:15"), "01.11.018", "Sebastian");
+		Group g4 = new Group(4L, sdf.parse("07.11.2017 15:00"), "01.11.018", "Ehsan");
+		Group g5 = new Group(5L, sdf.parse("15.11.2017 10:00"), "01.11.038", "Mohsen");
+		Group g6 = new Group(6L, sdf.parse("08.11.2017 12:00"), "01.11.018", "Saahil");
+		
+		ObjectifyService.ofy().save().entities(g1,g2,g3,g4,g5,g6).now();
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
   }
 
   public void contextDestroyed(ServletContextEvent event) {
