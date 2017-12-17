@@ -38,6 +38,7 @@ public class OfyHelper implements ServletContextListener {
     // request.
     ObjectifyService.register(Group.class);
     ObjectifyService.register(Registration.class);
+    ObjectifyService.register(Attendance.class);
     
     ObjectifyService.begin();
     
@@ -51,12 +52,15 @@ public class OfyHelper implements ServletContextListener {
 		Group g5 = new Group(5L, sdf.parse("15.11.2017 10:00"), "01.11.038", "Mohsen");
 		Group g6 = new Group(6L, sdf.parse("08.11.2017 12:00"), "01.11.018", "Saahil");
 		
+		Attendance a1 = new Attendance(1L, 1L, 1L, 1L, false);
+		Attendance a2 = new Attendance(2L, 2L, 1L, 1L, true);
+		
 		ObjectifyService.ofy().save().entities(g1,g2,g3,g4,g5,g6).now();
+		ObjectifyService.ofy().save().entities(a1, a2).now();
 	} catch (ParseException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    
   }
 
   public void contextDestroyed(ServletContextEvent event) {
