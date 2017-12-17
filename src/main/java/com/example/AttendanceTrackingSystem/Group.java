@@ -1,6 +1,7 @@
 package com.example.AttendanceTrackingSystem;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -8,7 +9,10 @@ import com.googlecode.objectify.annotation.Index;
 @Entity
 public class Group {
 	@Index @Id public Long number;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd.MM.yyyy HH:mm")
 	public Date date;
+	
 	public String room;
 	public String instructor_name;
 	
