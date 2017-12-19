@@ -1,7 +1,8 @@
 <%-- //[START all]--%>
 <%@page import="com.googlecode.objectify.annotation.Load"%>
-<%@ page import="com.ase_group6_4.AttendanceTrackingSystem.*" %>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.*" %>
 <%@page import="com.ase_group6_4.AttendanceTrackingSystem.Models.*"%>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Services.*"%>
 <%@page import="com.ase_group6_4.AttendanceTrackingSystem.Server.*"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -27,6 +28,8 @@
 <%
 	UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
+    StudentService studentService = StudentService.getInstance();
+    LecturerService lecturerService = LecturerService.getInstance();
     Student student;
 
     

@@ -1,7 +1,8 @@
 <%-- //[START all]--%>
 <%@page import="com.googlecode.objectify.annotation.Load"%>
-<%@ page import="com.ase_group6_4.AttendanceTrackingSystem.*" %>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.*" %>
 <%@page import="com.ase_group6_4.AttendanceTrackingSystem.Models.*"%>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Services.*"%>
 <%@page import="com.ase_group6_4.AttendanceTrackingSystem.Server.*"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -27,10 +28,11 @@
 <%
 	UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
+    StudentService studentService = StudentService.getInstance();
     Student student;
     if (user != null)
     {
-        student = ObjectifyService.ofy().load().type(Student.class).id(user.getUserId()).now();
+        student = studentService.getStudentByUser(user);
         if (student == null)
         {
             String firstname = request.getParameter("firstname");
@@ -38,7 +40,7 @@
             if ( firstname != null && lastname != null)
             {
                 student = new Student(user.getUserId(),user.getEmail(),firstname,lastname);
-                ObjectifyService.ofy().save().entities(student).now();
+                studentService.saveStudent(student);
 %>
         <jsp:forward page="home.jsp"/> 
 <%
