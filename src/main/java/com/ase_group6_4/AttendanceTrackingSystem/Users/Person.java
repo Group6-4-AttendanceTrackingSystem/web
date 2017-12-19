@@ -10,37 +10,45 @@ import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.annotation.Parent;
 
 public abstract class Person {
-	@Id private String user_id;
+	@Id private String userId;
 	private String email;
 	
 	private String firstname;
-	private String surname;
-	
-	private Date birthdate;
+	private String lastname;
 	
 	abstract public Boolean isLecturer();
+	
+	public Person() {
+		
+	}
 
-	public Person(String user_id, String email, String firstname, String surname, Date birthdate) {
-		this.user_id = user_id;
+	public Person(String userId, String email, String firstname, String lastname) {
+		this.userId = userId;
 		this.email = email;
 		this.firstname = firstname;
-		this.surname = surname;
-		this.birthdate = birthdate;
+		this.lastname = lastname;
 	}
 	
-	public Person(String user_id, String email) {
-		this.user_id = user_id;
+	public Person(String userId, String email) {
+		this.userId = userId;
 		this.email = email;
 	}
 	
-	public void setPersonalData(String firstname, String surname, Date birthdate) {
-		this.firstname = firstname;
-		this.surname = surname;
-		this.birthdate = birthdate;
+	public void setUserId(String email) {
+		this.email = email;
 	}
 	
-	public String getUser_id() {
-		return user_id;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setPersonalData(String firstname, String lastname) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+	
+	public String getUserId() {
+		return userId;
 	}
 
 	public String getEmail() {
@@ -51,12 +59,8 @@ public abstract class Person {
 		return firstname;
 	}
 
-	public String getSurname() {
-		return surname;
-	}
-
-	public Date getBirthdate() {
-		return birthdate;
+	public String getLastname() {
+		return lastname;
 	}
 	
 }

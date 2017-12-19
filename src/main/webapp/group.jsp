@@ -1,6 +1,8 @@
 <%-- //[START all]--%>
 <%@page import="com.googlecode.objectify.annotation.Load"%>
-<%@page import="com.example.AttendanceTrackingSystem.Group"%>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Group"%>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Users.Student"%>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Users.Lecturer"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -8,7 +10,7 @@
 <%@ page import="com.google.appengine.api.datastore.Query"%>
 
 <%-- //[START imports]--%>
-<%@ page import="com.example.AttendanceTrackingSystem.*" %>
+<%@ page import="com.ase_group6_4.AttendanceTrackingSystem.*" %>
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 <%-- //[END imports]--%>
@@ -26,9 +28,13 @@
 <%
 	UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
+    Student student;
+
     
     if (user != null) {
     	pageContext.setAttribute("user", user);
+        student = ObjectifyService.ofy().load().type(Student.class).id(user.getUserId()).now();
+        System.out.println(student);
 %>
 <p>Hello, ${fn:escapeXml(user.nickname)}! (You can
     <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
@@ -49,6 +55,8 @@
 </ul>
 <%
         } else {
+            student = new Student(user.getUserId(), user.getEmail(), "Haydar", "Sahin");
+            ObjectifyService.ofy().save().entities(student).now();
         	List<Group> groups = ObjectifyService.ofy()
         	          .load()
         	          .type(Group.class) // We want only Greetings

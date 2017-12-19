@@ -29,6 +29,6 @@ public class RegisterServlet extends HttpServlet {
 	    String group_number = req.getParameter("group");
 	    Registration registration = new Registration(Long.parseLong(group_number), user.getEmail(), user.getUserId(), new Date());
 	    ObjectifyService.ofy().save().entity(registration).now();
-		resp.sendRedirect("/guestbook.jsp");
+		resp.sendRedirect("/group.jsp");
 	}
 }
