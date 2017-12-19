@@ -55,8 +55,6 @@
 </ul>
 <%
         } else {
-            student = new Student(user.getUserId(), user.getEmail(), "Haydar", "Sahin");
-            ObjectifyService.ofy().save().entities(student).now();
         	List<Group> groups = ObjectifyService.ofy()
         	          .load()
         	          .type(Group.class) // We want only Greetings

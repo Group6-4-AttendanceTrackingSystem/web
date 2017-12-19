@@ -72,7 +72,7 @@
         else
         {   
 %>
-        <jsp:forward page="login.jsp"/> 
+        <jsp:forward page="home.jsp"/> 
 <%
         }
     }

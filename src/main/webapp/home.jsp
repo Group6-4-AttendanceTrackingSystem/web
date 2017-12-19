@@ -38,25 +38,70 @@
         {
             pageContext.setAttribute("student", student);
 %>
-            <p>Hello, ${fn:escapeXml(student.firstname)}!</p>
-<%            
+            <p>Hello, ${fn:escapeXml(student.firstname)}! (You can <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+<%
+            Registration reg = ObjectifyService.ofy().load().type(Registration.class).filter("user_id", student.getUserId()).first().now();
+            pageContext.setAttribute("reg", reg);
+            if(reg != null)
+            {
+                Group group = ObjectifyService.ofy().load().type(Group.class).id(reg.getGroup().getId()).now(); // filter("number",reg.getGroup().getId()).first().now();
+                pageContext.setAttribute("regestired_group", group);
+%>
+<p>You are registered to group ${fn:escapeXml(regestired_group.number)} with the following detail:</p>
+<ul>
+<li>Group date: ${fn:escapeXml(regestired_group.date)}</li>
+<li>Group room: ${fn:escapeXml(regestired_group.date)}</li>
+<li>Group instructor name: ${fn:escapeXml(regestired_group.instructor_name)}</li>
+</ul>
+<%
+            }
+            else
+            {
+                List<Group> groups = ObjectifyService.ofy()
+                                                    .load()
+                                                    .type(Group.class) // We want only Greetings
+                                                    .list();
+                if (groups.isEmpty())
+                {
+%>
+<p>No groups are available in the system</p>
+<%                   
+                }
+                else
+                {
+%>
+<p>Groups: </p>
+<ul>
+<%          
+                for (Group group: groups) {
+                    pageContext.setAttribute("available_group", group);
+%>
+<li>Group number: ${fn:escapeXml(available_group.number)}, Group date: ${fn:escapeXml(available_group.date)}, Group room: ${fn:escapeXml(available_group.room)}, Group instructor name: ${fn:escapeXml(available_group.instructor_name)}</li>
+<form action="/register" method="post">
+<input type="hidden" name = "group" value= "${fn:escapeXml(available_group.number)}"/>
+<input type="submit" value= "Register"/>
+</form>
+<%                  
+                }
+%>
+</ul>
+<%
+                }
+            }
         }
         else if (lecturer!=null)
         {
             pageContext.setAttribute("lecturer", lecturer);
 %>
-            <p>Hello, ${fn:escapeXml(lecturer.firstname)}!</p>
+<p>Hello, ${fn:escapeXml(lecturer.firstname)}! (You can <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
 <%            
         }
         else
         {
 %>
-            <p>Hello, an Error occured.</p>
+<p>Hello, an Error occured!  (You can <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
 <%        
         }   
-%>
-<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>
-<% 
     }
     else
     {
@@ -67,8 +112,7 @@
 <p>
 <a href="lecturer.jsp">Lecturer</a>
 </p>
-<%
-        
+<%        
     }
 %>
 
