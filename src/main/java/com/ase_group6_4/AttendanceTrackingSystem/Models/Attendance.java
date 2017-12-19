@@ -11,6 +11,7 @@ public class Attendance {
 	public Long tutorial_id;
 	public Long week_id;
 	public boolean presented;
+	public String token;
 	
 	public Attendance() {
 		super();
@@ -54,6 +55,12 @@ public class Attendance {
 	}
 	public void setPresented(boolean presented) {
 		this.presented = presented;
+	}
+	public String getToken() {
+		return this.token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 	

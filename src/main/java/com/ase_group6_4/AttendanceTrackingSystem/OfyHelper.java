@@ -25,7 +25,6 @@ import javax.servlet.ServletContextListener;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Attendance;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Group;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Lecturer;
-import com.ase_group6_4.AttendanceTrackingSystem.Models.Registration;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Student;
 import com.googlecode.objectify.ObjectifyService;
 
@@ -38,7 +37,6 @@ public class OfyHelper implements ServletContextListener {
     // This will be invoked as part of a warmup request, or the first user request if no warmup
     // request.
     ObjectifyService.register(Group.class);
-    ObjectifyService.register(Registration.class);
     ObjectifyService.register(Attendance.class);
     
     ObjectifyService.register(Student.class);

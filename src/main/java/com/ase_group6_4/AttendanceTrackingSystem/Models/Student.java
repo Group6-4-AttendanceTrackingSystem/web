@@ -1,11 +1,12 @@
 package com.ase_group6_4.AttendanceTrackingSystem.Models;
 
-import java.util.Date;
-
+import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 
 @Entity
 public class Student extends Person{
+	
+	private Ref<Group> group;
 	
 	public Student() {
 		super();
@@ -23,10 +24,18 @@ public class Student extends Person{
 		return false;
 	}
 	
+	public Ref<Group> getGroup() {
+		return this.group;
+	}
+	
+	public void setGroup(Ref<Group> group) {
+		this.group = group;
+	}
+	
 	@Override
     public String toString() {
 		if (this.getFirstname() != null && this.getLastname() != null) {
-			return ("Student with\n\tUser_id: "+this.getUserId()+"\n\tEmail: "+this.getEmail()+"\n\tFirstname: "+this.getFirstname()+"\n\tlastname: "+this.getLastname());
+			return ("Student with\n\tUser_id: "+this.getUserId()+"\n\tEmail: "+this.getEmail()+"\n\tFirstname: "+this.getFirstname()+"\n\tLastname: "+this.getLastname());
 		}else {
 			return ("Student with\n\tUser_id: "+this.getUserId()+"\n\tEmail: "+this.getEmail());
 		}

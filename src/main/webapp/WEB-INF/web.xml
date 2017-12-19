@@ -21,12 +21,22 @@
     
     <servlet>
       <servlet-name>register</servlet-name>
-      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.RegisterServlet</servlet-class>
+      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.RegistrationServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
     	<servlet-name>register</servlet-name>
     	<url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>unregister</servlet-name>
+      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.UnregistrationServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>unregister</servlet-name>
+        <url-pattern>/unregister</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

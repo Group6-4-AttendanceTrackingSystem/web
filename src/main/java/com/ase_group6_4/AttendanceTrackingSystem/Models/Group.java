@@ -27,6 +27,11 @@ public class Group {
 		this.room = room;
 		this.instructor_name = instructor_name;
 	}
+	
+	@Override
+    public String toString() {
+		return ("Group Number "+this.number+"\n\tDate: "+this.date+"\n\tRoom: "+this.room+"\n\tInstructor: "+this.instructor_name);
+    }
 
 
 	public Long getNumber() {

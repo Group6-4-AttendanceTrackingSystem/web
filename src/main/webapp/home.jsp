@@ -38,31 +38,31 @@
         lecturer = lecturerService.getLecturerByUser(user);
         if (student!=null)
         {
+            GroupService groupService = GroupService.getInstance();
             pageContext.setAttribute("student", student);
 %>
             <p>Hello, ${fn:escapeXml(student.firstname)}! (You can <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
 <%
-            Registration reg = ObjectifyService.ofy().load().type(Registration.class).filter("user_id", student.getUserId()).first().now();
-            pageContext.setAttribute("reg", reg);
-            if(reg != null)
+            if(student.getGroup() != null)
             {
-                Group group = ObjectifyService.ofy().load().type(Group.class).id(reg.getGroup().getId()).now(); // filter("number",reg.getGroup().getId()).first().now();
+                Group group = student.getGroup().get();
                 pageContext.setAttribute("regestired_group", group);
 %>
 <p>You are registered to group ${fn:escapeXml(regestired_group.number)} with the following detail:</p>
 <ul>
 <li>Group date: ${fn:escapeXml(regestired_group.date)}</li>
-<li>Group room: ${fn:escapeXml(regestired_group.date)}</li>
+<li>Group room: ${fn:escapeXml(regestired_group.room)}</li>
 <li>Group instructor name: ${fn:escapeXml(regestired_group.instructor_name)}</li>
+<form action="/unregister" method="post">
+<input type="submit" value= "Unregister"/>
+</form>
 </ul>
 <%
             }
             else
             {
-                List<Group> groups = ObjectifyService.ofy()
-                                                    .load()
-                                                    .type(Group.class) // We want only Greetings
-                                                    .list();
+
+                List<Group> groups = groupService.getAllGroups();
                 if (groups.isEmpty())
                 {
 %>
@@ -77,8 +77,12 @@
 <%          
                 for (Group group: groups) {
                     pageContext.setAttribute("available_group", group);
+
+
 %>
-<li>Group number: ${fn:escapeXml(available_group.number)}, Group date: ${fn:escapeXml(available_group.date)}, Group room: ${fn:escapeXml(available_group.room)}, Group instructor name: ${fn:escapeXml(available_group.instructor_name)}</li>
+<li>Group date: ${fn:escapeXml(available_group.date)}</li>
+<li>Group room: ${fn:escapeXml(available_group.room)}</li>
+<li>Group instructor name: ${fn:escapeXml(available_group.instructor_name)}</li>
 <form action="/register" method="post">
 <input type="hidden" name = "group" value= "${fn:escapeXml(available_group.number)}"/>
 <input type="submit" value= "Register"/>
