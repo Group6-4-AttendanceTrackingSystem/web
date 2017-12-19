@@ -108,9 +108,9 @@
 <p>
 <a href="student.jsp">Student</a>
 </p>
-<p>
+<!-- <p>
 <a href="lecturer.jsp">Lecturer</a>
-</p>
+</p> -->
 <%        
     }
 %>
