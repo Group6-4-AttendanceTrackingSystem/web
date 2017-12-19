@@ -10,6 +10,7 @@ import com.ase_group6_4.AttendanceTrackingSystem.Models.Group;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Student;
 import com.ase_group6_4.AttendanceTrackingSystem.Services.GroupService;
 import com.ase_group6_4.AttendanceTrackingSystem.Services.StudentService;
+import com.ase_group6_4.AttendanceTrackingSystem.Services.TokenGenerator;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -32,6 +33,8 @@ public class RegistrationServlet extends HttpServlet {
 	    			Group group = groupService.getGroupByGroupNumber(group_number);
 	    			if (group != null) {
 	    				student.setGroup(Ref.create(group));
+	    				TokenGenerator generator = TokenGenerator.getInstance();
+	    				student.setTokens(generator.generateTokensWithStudents(student));
 		    			studentService.saveStudent(student);	
 	    			}
 	    			resp.sendRedirect("/home.jsp");

@@ -1,5 +1,7 @@
 package com.ase_group6_4.AttendanceTrackingSystem.Models;
 
+import java.util.List;
+
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 
@@ -7,6 +9,7 @@ import com.googlecode.objectify.annotation.Entity;
 public class Student extends Person{
 	
 	private Ref<Group> group;
+	private List<String> tokens;
 	
 	public Student() {
 		super();
@@ -30,6 +33,14 @@ public class Student extends Person{
 	
 	public void setGroup(Ref<Group> group) {
 		this.group = group;
+	}
+	
+	public void setTokens(List<String> tokens) {
+		this.tokens = tokens;
+	}
+	
+	public List<String> getTokens(){
+		return this.tokens;
 	}
 	
 	@Override

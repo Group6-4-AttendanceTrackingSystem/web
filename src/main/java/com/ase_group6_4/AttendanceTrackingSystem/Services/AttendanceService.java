@@ -1,5 +1,6 @@
 package com.ase_group6_4.AttendanceTrackingSystem.Services;
 
+
 public class AttendanceService {
 	private static AttendanceService instance;
 
@@ -12,6 +13,5 @@ public class AttendanceService {
 
     private AttendanceService() {
     }
-    
     
 }

@@ -28,6 +28,7 @@ public class UnregistrationServlet extends HttpServlet {
 	    		if (student!=null) {			
 	    			if (student.getGroup() != null) {
 	    					student.setGroup(null);
+	    					student.setTokens(null);
 	    					studentService.saveStudent(student);
 	    			}
 	    			resp.sendRedirect("/home.jsp");
