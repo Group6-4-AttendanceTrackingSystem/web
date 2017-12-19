@@ -41,7 +41,7 @@
                 student = new Student(user.getUserId(),user.getEmail(),firstname,lastname);
                 ObjectifyService.ofy().save().entities(student).now();
 %>
-        <jsp:forward page="login.jsp"/> 
+        <jsp:forward page="home.jsp"/> 
 <%
             }
             else
