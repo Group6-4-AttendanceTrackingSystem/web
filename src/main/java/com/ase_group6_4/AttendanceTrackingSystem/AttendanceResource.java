@@ -1,4 +1,4 @@
-package com.example.AttendanceTrackingSystem;
+package com.ase_group6_4.AttendanceTrackingSystem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.example.AttendanceTrackingSystem;
+package com.ase_group6_4.AttendanceTrackingSystem;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -24,7 +24,7 @@ public class RegisterServlet extends HttpServlet {
 	  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		
 	    UserService userService = UserServiceFactory.getUserService();
-	    User user = userService.getCurrentUser();  // Find out who the user is.
+	    User user = userService.getCurrentUser();  // Find out who the user is
 
 	    String group_number = req.getParameter("group");
 	    Registration registration = new Registration(Long.parseLong(group_number), user.getEmail(), user.getUserId(), new Date());

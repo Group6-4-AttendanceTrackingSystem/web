@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 //[START all]
-package com.example.AttendanceTrackingSystem;
+package com.ase_group6_4.AttendanceTrackingSystem;
 
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
-import com.googlecode.objectify.ObjectifyService;
-
-import javax.servlet.ServletContextListener;
-
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+import com.ase_group6_4.AttendanceTrackingSystem.Users.Lecturer;
+import com.ase_group6_4.AttendanceTrackingSystem.Users.Student;
+import com.googlecode.objectify.ObjectifyService;
 
 /**
  * OfyHelper, a ServletContextListener, is setup in web.xml to run before a JSP is run.  This is
@@ -39,6 +37,9 @@ public class OfyHelper implements ServletContextListener {
     ObjectifyService.register(Group.class);
     ObjectifyService.register(Registration.class);
     ObjectifyService.register(Attendance.class);
+    
+    ObjectifyService.register(Student.class);
+    ObjectifyService.register(Lecturer.class);
     
     ObjectifyService.begin();
     
