@@ -1,4 +1,4 @@
-package com.ase_group6_4.AttendanceTrackingSystem;
+package com.ase_group6_4.AttendanceTrackingSystem.Models;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;

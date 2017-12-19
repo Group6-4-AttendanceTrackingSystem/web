@@ -1,4 +1,4 @@
-package com.ase_group6_4.AttendanceTrackingSystem.Users;
+package com.ase_group6_4.AttendanceTrackingSystem.Models;
 
 import java.util.Date;
 

@@ -21,7 +21,7 @@
     
     <servlet>
       <servlet-name>register</servlet-name>
-      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.RegisterServlet</servlet-class>
+      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.RegisterServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>

@@ -1,5 +1,6 @@
-package com.ase_group6_4.AttendanceTrackingSystem;
+package com.ase_group6_4.AttendanceTrackingSystem.Server;
 
+import com.ase_group6_4.AttendanceTrackingSystem.Models.Registration;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;

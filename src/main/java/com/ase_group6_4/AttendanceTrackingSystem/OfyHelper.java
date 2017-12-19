@@ -22,8 +22,11 @@ import java.text.SimpleDateFormat;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.ase_group6_4.AttendanceTrackingSystem.Users.Lecturer;
-import com.ase_group6_4.AttendanceTrackingSystem.Users.Student;
+import com.ase_group6_4.AttendanceTrackingSystem.Models.Attendance;
+import com.ase_group6_4.AttendanceTrackingSystem.Models.Group;
+import com.ase_group6_4.AttendanceTrackingSystem.Models.Lecturer;
+import com.ase_group6_4.AttendanceTrackingSystem.Models.Registration;
+import com.ase_group6_4.AttendanceTrackingSystem.Models.Student;
 import com.googlecode.objectify.ObjectifyService;
 
 /**

@@ -1,8 +1,8 @@
 <%-- //[START all]--%>
 <%@page import="com.googlecode.objectify.annotation.Load"%>
-<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Group"%>
-<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Users.Student"%>
-<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Users.Lecturer"%>
+<%@ page import="com.ase_group6_4.AttendanceTrackingSystem.*" %>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Models.*"%>
+<%@page import="com.ase_group6_4.AttendanceTrackingSystem.Server.*"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -10,7 +10,6 @@
 <%@ page import="com.google.appengine.api.datastore.Query"%>
 
 <%-- //[START imports]--%>
-<%@ page import="com.ase_group6_4.AttendanceTrackingSystem.*" %>
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 <%-- //[END imports]--%>

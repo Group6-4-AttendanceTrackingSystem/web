@@ -1,4 +1,4 @@
-package com.ase_group6_4.AttendanceTrackingSystem;
+package com.ase_group6_4.AttendanceTrackingSystem.Server;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +9,7 @@ import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
+import com.ase_group6_4.AttendanceTrackingSystem.Models.Attendance;
 import com.googlecode.objectify.ObjectifyService;
 
 public class AttendanceResource extends ServerResource {
