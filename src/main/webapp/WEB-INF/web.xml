@@ -45,6 +45,23 @@
     
 <!-- [END standard_mappings] -->
 
+<!-- [START restlet mappings] -->
+    <servlet>
+        <servlet-name>AttendanceRestletServlet</servlet-name>
+        <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+        <init-param>
+            <param-name>org.restlet.application</param-name>
+            <param-value>com.ase_group6_4.AttendanceTrackingSystem.Server.AttendanceApplication</param-value>
+        </init-param>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>AttendanceRestletServlet</servlet-name>
+        <url-pattern>/attendance/*</url-pattern>
+    </servlet-mapping>
+<!-- [END restlet mappings] -->
+
 <!-- [START Objectify] -->
     <filter>
       <filter-name>ObjectifyFilter</filter-name>

@@ -1,5 +1,6 @@
 package com.ase_group6_4.AttendanceTrackingSystem.Models;
 
+import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -8,8 +9,8 @@ import com.googlecode.objectify.annotation.Index;
 public class Attendance {
 	@Index @Id public Long attendance_id;
 	public Long student_id;
-	public Long tutorial_id;
-	public Long week_id;
+	public Long  tutorial_id;
+	public Long  week_id;
 	public boolean presented;
 	
 	public Attendance() {
@@ -18,6 +19,7 @@ public class Attendance {
 	
 	public Attendance(Long attendance_id, Long student_id, Long tutorial_id, Long week_id, boolean presented) {
 		super();
+//		this.attendance_id = ObjectifyService.factory().allocateId(Attendance.class).getId();
 		this.attendance_id = attendance_id;
 		this.student_id = student_id;
 		this.tutorial_id = tutorial_id;

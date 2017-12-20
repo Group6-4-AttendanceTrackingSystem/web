@@ -1,12 +1,15 @@
 package com.ase_group6_4.AttendanceTrackingSystem.Models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 
 @Entity
-public class Student extends Person{
+public class Student extends Person implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Ref<Group> group;
 	private List<String> tokens;

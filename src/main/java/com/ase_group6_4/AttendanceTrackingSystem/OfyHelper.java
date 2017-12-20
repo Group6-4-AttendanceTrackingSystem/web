@@ -56,9 +56,11 @@ public class OfyHelper implements ServletContextListener {
 		
 		Attendance a1 = new Attendance(1L, 1L, 1L, 1L, false);
 		Attendance a2 = new Attendance(2L, 2L, 1L, 1L, true);
+		Attendance a3 = new Attendance(3L, 3L, 2L, 1L, true);
+		Attendance a4 = new Attendance(4L, 4L, 2L, 1L, true);
 		
 		ObjectifyService.ofy().save().entities(g1,g2,g3,g4,g5,g6).now();
-		ObjectifyService.ofy().save().entities(a1, a2).now();
+		ObjectifyService.ofy().save().entities(a1, a2, a3, a4).now();
 	} catch (ParseException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
