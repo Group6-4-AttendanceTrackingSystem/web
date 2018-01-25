@@ -24,7 +24,7 @@ public class AttendanceService {
     		return attendance;
     }
     
-    public Attendance setAttendanceWith(long attendance_id,long student_id, long tutorial_id, long week_id, boolean presented) {
+    public Attendance setAttendanceWith(String attendance_id,String student_id, long tutorial_id, long week_id, boolean presented) {
     		Attendance attendance = new Attendance(attendance_id,student_id,tutorial_id,week_id,presented);
     		this.saveAttendace(attendance);
     		return attendance;
@@ -50,7 +50,7 @@ public class AttendanceService {
     		return attendances;
     }
     
-    public List<Attendance> getAllAttendancesByStudentId(Long studentId){
+    public List<Attendance> getAllAttendancesByStudentId(String studentId){
     		List<Attendance> tmp_attendances = this.getAllAttendances();
 		List<Attendance> attendances = new ArrayList<Attendance>();
 		//Objectify Filter didin't work		

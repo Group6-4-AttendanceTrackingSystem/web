@@ -22,28 +22,30 @@
 
 <body>
 
-<%
-    Student student;
-    User user;
-    UserService userService = UserService.getInstance();
-    user = userService.getCurrentUser(request);
+<form action="/logout" method="post">
+    <div>
+            <div>
+                <label>E-Mail:</label>
+                <input type="text" name="email"/>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" name="password" />
+            </div>
+    </div>
+    <button type="submit" id="loginButton">
+        Login
+    </button>
+</form>
 
-    if (user != null)
-    { 
-%>
-        <jsp:forward page="home.jsp"/> 
 <%
-    }
-    else
+    String message = request.getParameter("message");
+    if(message != null && !message.isEmpty())
     {
+        pageContext.setAttribute("message", message);
 %>
 
-<p>
-<a href="login.jsp">Login as Student</a>
-</p>
-<p>
-<a href="signup.jsp">Signup as Student</a>
-</p>
+<p> ${fn:escapeXml(message)}</p>
 
 <%
     }

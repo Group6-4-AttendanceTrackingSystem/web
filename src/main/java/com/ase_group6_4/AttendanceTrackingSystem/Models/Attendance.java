@@ -7,8 +7,8 @@ import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Attendance {
-	@Index @Id public Long attendance_id;
-	public Long student_id;
+	@Index @Id public String attendance_id;
+	public String student_id;
 	public Long  tutorial_id;
 	public Long  week_id;
 	public boolean presented;
@@ -17,9 +17,8 @@ public class Attendance {
 		super();
 	}
 	
-	public Attendance(Long attendance_id, Long student_id, Long tutorial_id, Long week_id, boolean presented) {
+	public Attendance(String attendance_id, String student_id, Long tutorial_id, Long week_id, boolean presented) {
 		super();
-//		this.attendance_id = ObjectifyService.factory().allocateId(Attendance.class).getId();
 		this.attendance_id = attendance_id;
 		this.student_id = student_id;
 		this.tutorial_id = tutorial_id;
@@ -27,16 +26,16 @@ public class Attendance {
 		this.presented = presented;
 	}
 
-	public Long getAttendance_id() {
+	public String getAttendance_id() {
 		return attendance_id;
 	}
-	public void setAttendance_id(Long attendance_id) {
+	public void setAttendance_id(String attendance_id) {
 		this.attendance_id = attendance_id;
 	}
-	public Long getStudent_id() {
+	public String getStudent_id() {
 		return student_id;
 	}
-	public void setStudent_id(Long student_id) {
+	public void setStudent_id(String student_id) {
 		this.student_id = student_id;
 	}
 	public Long getTutorial_id() {

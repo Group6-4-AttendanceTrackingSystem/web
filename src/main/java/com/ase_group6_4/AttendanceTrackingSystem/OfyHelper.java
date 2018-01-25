@@ -26,6 +26,7 @@ import com.ase_group6_4.AttendanceTrackingSystem.Models.Attendance;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Group;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Lecturer;
 import com.ase_group6_4.AttendanceTrackingSystem.Models.Student;
+import com.ase_group6_4.AttendanceTrackingSystem.Models.User;
 import com.googlecode.objectify.ObjectifyService;
 
 /**
@@ -39,6 +40,7 @@ public class OfyHelper implements ServletContextListener {
     ObjectifyService.register(Group.class);
     ObjectifyService.register(Attendance.class);
     
+    ObjectifyService.register(User.class);
     ObjectifyService.register(Student.class);
     ObjectifyService.register(Lecturer.class);
     
@@ -47,20 +49,27 @@ public class OfyHelper implements ServletContextListener {
     // create test data
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
     try {
-		Group g1 = new Group(1L, sdf.parse("06.11.2017 09:00"), "01.11.018", "Ana");
-		Group g2 = new Group(2L, sdf.parse("06.11.2017 13:45"), "01.11.018", "Sebastian");
-		Group g3 = new Group(3L, sdf.parse("06.11.2017 15:15"), "01.11.018", "Sebastian");
-		Group g4 = new Group(4L, sdf.parse("07.11.2017 15:00"), "01.11.018", "Ehsan");
-		Group g5 = new Group(5L, sdf.parse("15.11.2017 10:00"), "01.11.038", "Mohsen");
-		Group g6 = new Group(6L, sdf.parse("08.11.2017 12:00"), "01.11.018", "Saahil");
-		
-		Attendance a1 = new Attendance(1L, 1L, 1L, 1L, false);
-		Attendance a2 = new Attendance(2L, 2L, 1L, 1L, true);
-		Attendance a3 = new Attendance(3L, 3L, 2L, 1L, true);
-		Attendance a4 = new Attendance(4L, 4L, 2L, 1L, true);
+    	
+    		Lecturer lect1 = new Lecturer("ana@tum.de","ana","Ana","TUTOR");
+    		Lecturer lect2 = new Lecturer("sebastian@tum.de","sebastian","Sebastian","TUTOR");
+    		Lecturer lect3 = new Lecturer("ehsan@tum.de","ehsan","Ehsan","TUTOR");
+    		Lecturer lect4 = new Lecturer("mohsen@tum.de","mohsen","Mohsen","TUTOR");
+    		Lecturer lect5 = new Lecturer("saahil@tum.de","saahil","Saahil","TUTOR");
+    		
+    		ObjectifyService.ofy().save().entities(lect1,lect2,lect3,lect4,lect5).now();
+    	
+		Group g1 = new Group(1L, sdf.parse("06.11.2017 09:00"), "01.11.018", lect1.getEmail());
+		Group g2 = new Group(2L, sdf.parse("06.11.2017 13:45"), "01.11.018", lect2.getEmail());
+		Group g3 = new Group(3L, sdf.parse("06.11.2017 15:15"), "01.11.018", lect2.getEmail());
+		Group g4 = new Group(4L, sdf.parse("07.11.2017 15:00"), "01.11.018", lect3.getEmail());
+		Group g5 = new Group(5L, sdf.parse("15.11.2017 10:00"), "01.11.038", lect4.getEmail());
+		Group g6 = new Group(6L, sdf.parse("08.11.2017 12:00"), "01.11.018", lect5.getEmail());
 		
 		ObjectifyService.ofy().save().entities(g1,g2,g3,g4,g5,g6).now();
-		ObjectifyService.ofy().save().entities(a1, a2, a3, a4).now();
+		
+		Student stu = new Student("haydarsahin93@gmail.com","asdafasdaf","Haydar","Sahin");
+		
+		ObjectifyService.ofy().save().entities(stu).now();
 	} catch (ParseException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.ase_group6_4.AttendanceTrackingSystem.Models;
 import java.util.Date;
 
+import com.ase_group6_4.AttendanceTrackingSystem.Services.UserService;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -14,23 +15,24 @@ public class Group {
 	public Date date;
 	
 	public String room;
-	public String instructor_name;
+	public String instructor_email;
 	
 	public Group() {
 		date = new Date();
 	}
 	
-	public Group(Long number, Date date, String room, String instructor_name) {
+	public Group(Long number, Date date, String room, String instructor_id) {
 		super();
 		this.number = number;
 		this.date = date;
 		this.room = room;
-		this.instructor_name = instructor_name;
+		this.instructor_email = instructor_id;
 	}
 	
 	@Override
     public String toString() {
-		return ("Group Number "+this.number+"\n\tDate: "+this.date+"\n\tRoom: "+this.room+"\n\tInstructor: "+this.instructor_name);
+		Lecturer lecturer = (Lecturer)UserService.getInstance().getUserByEmail(this.instructor_email);
+		return ("Group Number "+this.number+"\n\tDate: "+this.date+"\n\tRoom: "+this.room+"\n\tInstructor: "+lecturer.getFirstname());
     }
 
 
@@ -64,12 +66,12 @@ public class Group {
 	}
 
 
-	public String getInstructor_name() {
-		return instructor_name;
+	public String getInstructor_email() {
+		return instructor_email;
 	}
 
 
-	public void setInstructor_name(String instructor_name) {
-		this.instructor_name = instructor_name;
+	public void setInstructor_email(String instructor_email) {
+		this.instructor_email = instructor_email;
 	}
 }

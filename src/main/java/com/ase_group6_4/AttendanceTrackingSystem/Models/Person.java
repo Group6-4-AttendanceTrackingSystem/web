@@ -8,51 +8,27 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.Subclass;
 
-public abstract class Person {
-	@Id private String userId;
-	private String email;
+@Subclass(index=true)
+public abstract class Person extends User{
 	
 	private String firstname;
 	private String lastname;
 	
-	abstract public Boolean isLecturer();
-	
 	public Person() {
-		
+		super();
 	}
 
-	public Person(String userId, String email, String firstname, String lastname) {
-		this.userId = userId;
-		this.email = email;
+	public Person(String email, String password, String firstname, String lastname) {
+		super(email,password);
 		this.firstname = firstname;
 		this.lastname = lastname;
-	}
-	
-	public Person(String userId, String email) {
-		this.userId = userId;
-		this.email = email;
-	}
-	
-	public void setUserId(String email) {
-		this.email = email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 	public void setPersonalData(String firstname, String lastname) {
 		this.firstname = firstname;
 		this.lastname = lastname;
-	}
-	
-	public String getUserId() {
-		return userId;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 
 	public String getFirstname() {

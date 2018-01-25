@@ -21,12 +21,13 @@ public class TokenGenerator {
     private TokenGenerator() {
     }
     
-    public List<String> generateTokensWithStudents(Student student){
+	public List<String> generateTokensWithStudents(Student student, int numberofweeks){
     		List<String> tokens = new ArrayList<String>();
-    			for (int i = 0 ; i < 13; i++) {
+    			for (int i = 0 ; i < numberofweeks; i++) {
     				long longToken = Math.abs( random.nextLong() );
-                String random = Long.toString( longToken, 16 );
-                tokens.add((student.getUserId() + ":" + random));
+                String random1 = Long.toString( longToken, 8 );
+                String random2 = Long.toString( longToken, 8 );
+                tokens.add((student.getEmail()  + ":" + random1 + ":"+ student.getGroup().get().number+ ":" + random2 + ":" +i));
     			}
     		return tokens;
     }

@@ -5,9 +5,6 @@
 <%@page import="com.ase_group6_4.AttendanceTrackingSystem.Services.*"%>
 <%@page import="com.ase_group6_4.AttendanceTrackingSystem.Server.*"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.google.appengine.api.users.User" %>
-<%@ page import="com.google.appengine.api.users.UserService" %>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
 <%@ page import="com.google.appengine.api.datastore.Query"%>
 
 <%-- //[START imports]--%>
@@ -26,36 +23,31 @@
 <body>
 
 <%
-	UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    StudentService studentService = StudentService.getInstance();
-    LecturerService lecturerService = LecturerService.getInstance();
+	UserService userService = UserService.getInstance();
+    User user = userService.getCurrentUser(request);
     Student student;
-    Lecturer lecturer;
     if (user != null)
     {
-        student = studentService.getStudentByUser(user);
-        lecturer = lecturerService.getLecturerByUser(user);
-        if (student!=null)
+        if (!user.isLecturer())
         {
+            student = (Student) user;
             GroupService groupService = GroupService.getInstance();
             pageContext.setAttribute("student", student);
 %>
-            <p>Hello, ${fn:escapeXml(student.firstname)}! (You can <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+            <p>Hello, ${fn:escapeXml(student.firstname)}! (You can <form name="LogoutForm" method="post" action="/logout"  style="margin: 0; padding: 0; display: inline;"><input type="hidden" name="email" style="display: inline;" value=${fn:escapeXml(user.email)}><input type="hidden" name="sessionKey" style="display: inline;" value=%{fn:escapeXml(user.sessionKey)}><a style="display: inline;" href="#" onclick="document.LogoutForm.submit()">sign out</a></form>.)</p>
 <%
             if(student.getGroup() != null)
             {
                 Group group = student.getGroup().get();
                 pageContext.setAttribute("regestired_group", group);
+                User lecturer = userService.getUserByEmail(group.instructor_email);
+                pageContext.setAttribute("instructor_name", ((Person)lecturer).getFirstname());
 %>
 <p>You are registered to group ${fn:escapeXml(regestired_group.number)} with the following detail:</p>
 <ul>
 <li>Group date: ${fn:escapeXml(regestired_group.date)}</li>
 <li>Group room: ${fn:escapeXml(regestired_group.room)}</li>
-<li>Group instructor name: ${fn:escapeXml(regestired_group.instructor_name)}</li>
-<form action="/unregister" method="post">
-<input type="submit" value= "Unregister"/>
-</form>
+<li>Group instructor name: ${fn:escapeXml(instructor_name)}</li>
 </ul>
 <%
             }
@@ -77,12 +69,14 @@
 <%          
                 for (Group group: groups) {
                     pageContext.setAttribute("available_group", group);
+                    User lecturer = userService.getUserByEmail(group.instructor_email);
+                    pageContext.setAttribute("instructor_name", ((Person)lecturer).getFirstname());
 
 
 %>
 <li>Group date: ${fn:escapeXml(available_group.date)}</li>
 <li>Group room: ${fn:escapeXml(available_group.room)}</li>
-<li>Group instructor name: ${fn:escapeXml(available_group.instructor_name)}</li>
+<li>Group instructor name: ${fn:escapeXml(instructor_name)}</li>
 <form action="/register" method="post">
 <input type="hidden" name = "group" value= "${fn:escapeXml(available_group.number)}"/>
 <input type="submit" value= "Register"/>
@@ -95,30 +89,18 @@
                 }
             }
         }
-        else if (lecturer!=null)
-        {
-            pageContext.setAttribute("lecturer", lecturer);
-%>
-<p>Hello, ${fn:escapeXml(lecturer.firstname)}! (You can <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-<%            
-        }
         else
         {
 %>
-<p>Hello, an Error occured!  (You can <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-<%        
+       <p>Hello, an Error occured! (You can <form name="LogoutForm" method="post" action="/logout"  style="margin: 0; padding: 0; display: inline;"><input type="hidden" name="email" style="display: inline;" value=${fn:escapeXml(user.email)}><input type="hidden" name="sessionKey" style="display: inline;" value=%{fn:escapeXml(user.sessionKey)}><a style="display: inline;" href="#" onclick="document.LogoutForm.submit()">sign out</a></form>.)</p>
+<%       
         }   
     }
     else
     {
 %>
-<p>
-<a href="student.jsp">Student</a>
-</p>
-<!-- <p>
-<a href="lecturer.jsp">Lecturer</a>
-</p> -->
-<%        
+        <jsp:forward page="student.jsp"/> 
+<%      
     }
 %>
 

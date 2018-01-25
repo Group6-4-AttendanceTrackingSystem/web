@@ -21,22 +21,43 @@
     
     <servlet>
       <servlet-name>register</servlet-name>
-      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.RegistrationServlet</servlet-class>
+      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.Web.RegistrationServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
     	<servlet-name>register</servlet-name>
     	<url-pattern>/register</url-pattern>
     </servlet-mapping>
+    
 
     <servlet>
-      <servlet-name>unregister</servlet-name>
-      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.UnregistrationServlet</servlet-class>
+      <servlet-name>login</servlet-name>
+      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.Web.LoginServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>unregister</servlet-name>
-        <url-pattern>/unregister</url-pattern>
+    	<servlet-name>login</servlet-name>
+    	<url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+      <servlet-name>signup</servlet-name>
+      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.Web.SignupServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+    	<servlet-name>signup</servlet-name>
+    	<url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+      <servlet-name>logout</servlet-name>
+      <servlet-class>com.ase_group6_4.AttendanceTrackingSystem.Server.Web.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+    	<servlet-name>logout</servlet-name>
+    	<url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
@@ -51,14 +72,29 @@
         <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
         <init-param>
             <param-name>org.restlet.application</param-name>
-            <param-value>com.ase_group6_4.AttendanceTrackingSystem.Server.AttendanceApplication</param-value>
+            <param-value>com.ase_group6_4.AttendanceTrackingSystem.Server.Mobile.AttendanceApplication</param-value>
         </init-param>
     </servlet>
 
 
     <servlet-mapping>
         <servlet-name>AttendanceRestletServlet</servlet-name>
-        <url-pattern>/attendance/*</url-pattern>
+        <url-pattern>/rest/attendance/*</url-pattern>
+    </servlet-mapping>
+    
+        <servlet>
+        <servlet-name>AuthenticationRestletServlet</servlet-name>
+        <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+        <init-param>
+            <param-name>org.restlet.application</param-name>
+            <param-value>com.ase_group6_4.AttendanceTrackingSystem.Server.Mobile.AuthenticationApplication</param-value>
+        </init-param>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>AuthenticationRestletServlet</servlet-name>
+        <url-pattern>/rest/authentication/*</url-pattern>
     </servlet-mapping>
 <!-- [END restlet mappings] -->
 
